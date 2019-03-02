@@ -36,7 +36,7 @@ public class Principal extends javax.swing.JFrame {
         Buscar = new javax.swing.JButton();
         txt_bnombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
+        Salir = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         Elimininar = new javax.swing.JButton();
         CambiarNombre = new javax.swing.JButton();
@@ -139,14 +139,19 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
-        jButton8.setText("Salir");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        Salir.setText("Salir");
+        Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                SalirActionPerformed(evt);
             }
         });
 
         Elimininar.setText("Eliminar contacto");
+        Elimininar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ElimininarActionPerformed(evt);
+            }
+        });
 
         CambiarNombre.setText("Cambiar nombre");
         CambiarNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +254,7 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jButton8)))
+                        .addComponent(Salir)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,7 +269,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton8)
+                .addComponent(Salir)
                 .addGap(57, 57, 57))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(91, 91, 91)
@@ -305,8 +310,20 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarActionPerformed
 
     private void CambiarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarNombreActionPerformed
-     String original=txt_nombre.getText();
-        this.txt_nombre.setText("");
+    
+        String telefono=txt_telefono.getText();
+        String cambio=txt_nombre.getText();
+        
+        
+        if(cambio.length()==0){     
+        JOptionPane.showMessageDialog(this, "No introdujo ningun nombre","Error", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            for(Persona p: contacto){
+       if( p.getTelefono().equals(telefono)){
+         p.setNombre(cambio);
+      }}
+          JOptionPane.showMessageDialog(this, "El nombre ha sido cambiado con exito","Exito", JOptionPane.INFORMATION_MESSAGE); 
+        }
     }//GEN-LAST:event_CambiarNombreActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
@@ -332,15 +349,28 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_option_serActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_SalirActionPerformed
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
         this.txt_nombre.setText("");
         this.txt_bnombre.setText("");
         this.txt_telefono.setText("");
     }//GEN-LAST:event_ActualizarActionPerformed
+
+    private void ElimininarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ElimininarActionPerformed
+         String name=this.txt_nombre.getText();
+         this.txt_nombre.setText("");
+        this.txt_telefono.setText("");
+         for(Persona p: contacto){
+       if( p.getNombre().equals(name)){
+        contacto.remove(p);
+       
+       JOptionPane.showMessageDialog(this, "El proceso se completo con exito","Contacto Eliminado", JOptionPane.INFORMATION_MESSAGE);
+      }else{JOptionPane.showMessageDialog(this, "El proceso no se completo con exito","Contacto No Eliminado", JOptionPane.ERROR_MESSAGE);}
+     }
+    }//GEN-LAST:event_ElimininarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -360,9 +390,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton Buscar;
     private javax.swing.JButton CambiarNombre;
     private javax.swing.JButton Elimininar;
+    private javax.swing.JButton Salir;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

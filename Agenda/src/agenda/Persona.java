@@ -5,6 +5,10 @@
  * @author Juan-Jesus
  */
 public class Persona {
+
+    static void remove(Persona p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     private String nombre;
     private String telefono;
 
