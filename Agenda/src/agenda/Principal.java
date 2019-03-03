@@ -14,12 +14,12 @@ public class Principal extends javax.swing.JFrame  {
  private ArrayList<Persona> contacto;
  
     public Principal() {
-        contacto=new ArrayList<>();
-        Serializacion deserializadora= new  Serializacion();
-        contacto=(ArrayList<Persona>) deserializadora.leerObjetos("MisContactos.data");
+     
         initComponents();
         this.setTitle("AGENDA 1.0");
         this.setLocationRelativeTo(null);
+         buttonGroup3.add(this.CargarSerializacion);
+       buttonGroup3.add(this.CargarTxt);
         
     }
 
@@ -30,6 +30,7 @@ public class Principal extends javax.swing.JFrame  {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         jPanel7 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         txt_telefono = new javax.swing.JTextField();
@@ -41,6 +42,9 @@ public class Principal extends javax.swing.JFrame  {
         Buscar = new javax.swing.JButton();
         txt_bnombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        CargarSerializacion = new javax.swing.JRadioButton();
+        CargarTxt = new javax.swing.JRadioButton();
         Salir = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         Elimininar = new javax.swing.JButton();
@@ -116,6 +120,43 @@ public class Principal extends javax.swing.JFrame  {
 
         jLabel4.setText("Introduzca el nombre de contacto:");
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cargar Datos"));
+
+        CargarSerializacion.setText("Serializacion");
+        CargarSerializacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CargarSerializacionActionPerformed(evt);
+            }
+        });
+
+        CargarTxt.setText("Archivo Txt");
+        CargarTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CargarTxtActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CargarSerializacion)
+                    .addComponent(CargarTxt))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(CargarSerializacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(CargarTxt)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -129,13 +170,16 @@ public class Principal extends javax.swing.JFrame  {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_bnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))))
-                .addContainerGap(40, Short.MAX_VALUE))
+                            .addComponent(jLabel4)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 11, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_bnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,11 +237,6 @@ public class Principal extends javax.swing.JFrame  {
         });
 
         GuardarTxt.setText("Archivo Txt");
-        GuardarTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarTxtActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -258,32 +297,31 @@ public class Principal extends javax.swing.JFrame  {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(Salir)))
                 .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Salir))
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(Salir)
-                .addGap(57, 57, 57))
-            .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(91, 91, 91)
                 .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(93, 93, 93)
+                        .addComponent(Salir)
+                        .addContainerGap())
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -338,6 +376,8 @@ public class Principal extends javax.swing.JFrame  {
     }//GEN-LAST:event_CambiarNombreActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+      if(CargarSerializacion.isSelected()==true)
+      {
        String name=this.txt_bnombre.getText(); 
        this.txt_nombre.setText("");
        this.txt_telefono.setText("");
@@ -355,7 +395,8 @@ public class Principal extends javax.swing.JFrame  {
          this.txt_telefono.setText(buscado.getTelefono());     
     }else{
        JOptionPane.showMessageDialog(this, "Contacto no encontrado","", JOptionPane.INFORMATION_MESSAGE);
-       }  
+       }   
+      }else{JOptionPane.showMessageDialog(this, "No ha cargado ningún dato","", JOptionPane.ERROR_MESSAGE);}
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
@@ -389,11 +430,16 @@ public class Principal extends javax.swing.JFrame  {
   JOptionPane.showMessageDialog(this, "Su modificacion ha sido guardad en el disco duro","Exito", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_GuardarSerializacionActionPerformed
 
-    private void GuardarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarTxtActionPerformed
-        Archivotxt archivo=new Archivotxt();
-        archivo.escribir(contacto);
-        JOptionPane.showMessageDialog(this, "Su modificacion ha sido guardad en un archivo","Exito", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_GuardarTxtActionPerformed
+    private void CargarSerializacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarSerializacionActionPerformed
+        contacto=new ArrayList<>();
+        Serializacion deserializadora= new  Serializacion();
+        contacto=(ArrayList<Persona>) deserializadora.leerObjetos("MisContactos.data"); 
+        JOptionPane.showMessageDialog(this, "Ha cargado sus datos por serializacion","Carga", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_CargarSerializacionActionPerformed
+
+    private void CargarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CargarTxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -412,15 +458,19 @@ public class Principal extends javax.swing.JFrame  {
     private javax.swing.JButton Agregar;
     private javax.swing.JButton Buscar;
     private javax.swing.JButton CambiarNombre;
+    private javax.swing.JRadioButton CargarSerializacion;
+    private javax.swing.JRadioButton CargarTxt;
     private javax.swing.JButton Elimininar;
     private javax.swing.JButton GuardarSerializacion;
     private javax.swing.JButton GuardarTxt;
     private javax.swing.JButton Salir;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -432,7 +482,5 @@ public class Principal extends javax.swing.JFrame  {
     private javax.swing.JTextField txt_telefono;
     // End of variables declaration//GEN-END:variables
 
-    private void GuardarSerializacion(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 }
