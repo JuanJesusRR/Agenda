@@ -193,6 +193,11 @@ public class Principal extends javax.swing.JFrame  {
         });
 
         GuardarTxt.setText("Archivo Txt");
+        GuardarTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarTxtActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -383,6 +388,12 @@ public class Principal extends javax.swing.JFrame  {
         serializadora.escribirObjetos(contacto);
   JOptionPane.showMessageDialog(this, "Su modificacion ha sido guardad en el disco duro","Exito", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_GuardarSerializacionActionPerformed
+
+    private void GuardarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarTxtActionPerformed
+        Archivotxt archivo=new Archivotxt();
+        archivo.escribir(contacto);
+        JOptionPane.showMessageDialog(this, "Su modificacion ha sido guardad en un archivo","Exito", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_GuardarTxtActionPerformed
 
     /**
      * @param args the command line arguments
