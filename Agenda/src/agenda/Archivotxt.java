@@ -13,11 +13,33 @@ public class Archivotxt {
             writer.close();
             
         }catch(IOException e){
-            JOptionPane.showMessageDialog(null,"Ha sucedido un error"+e);
+            JOptionPane.showMessageDialog(null,"Ha sucedido un error:"+e);
         }
     }
     
-    
+public Object leer(String nombreArchivo){
+            Object retorno=null;
+           
+        try {
+            File myFile=new File(nombreArchivo);
+            FileReader fileReader=new FileReader(myFile);
+            BufferedReader reader=new BufferedReader(fileReader);
+            String line;
+                try {
+                    retorno=line=reader.readLine();
+                    reader.close();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Ha sucedido un error:"+ex);
+                }
+            
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Ha sucedido un error:"+ex);
+        }
+   
+        return retorno;
+        
+        
+        }
     
     
     

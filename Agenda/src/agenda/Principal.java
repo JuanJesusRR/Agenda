@@ -443,7 +443,10 @@ public class Principal extends javax.swing.JFrame  {
     }//GEN-LAST:event_CargarSerializacionActionPerformed
 
     private void CargarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarTxtActionPerformed
-        // TODO add your handling code here:
+        contacto=new ArrayList<>();
+        Archivotxt archivo1=new Archivotxt();
+        contacto=(ArrayList<Persona>) archivo1.leer("Contactos.txt");
+        JOptionPane.showMessageDialog(null, "Sus contactos se han cargado de un archivo de texto");
     }//GEN-LAST:event_CargarTxtActionPerformed
 
     private void GuardarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarTxtActionPerformed

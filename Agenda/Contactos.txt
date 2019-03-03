@@ -1,1 +1,1 @@
-[nombre=maria, telefono=3022345191, nombre=jineth, telefono=3022561456, nombre=alexander, telefono=3165221484, nombre=ikki, telefono=3144691260, nombre=ivan, telefono=3144691262]
+[nombre=maria, telefono=3022345191, nombre=jineth, telefono=3022561456, nombre=alexander, telefono=3165221484, nombre=ikki, telefono=3144691260]
