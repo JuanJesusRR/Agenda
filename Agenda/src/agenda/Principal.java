@@ -1,21 +1,26 @@
+package agenda;
+
+
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-
-
 
 /**
  *
  * @author Juan-Jesus
  */
-public class Principal extends javax.swing.JFrame {
+public class Principal extends javax.swing.JFrame  {
 
  private ArrayList<Persona> contacto;
+ 
     public Principal() {
         contacto=new ArrayList<>();
+        Serializacion deserializadora= new  Serializacion();
+        contacto=(ArrayList<Persona>) deserializadora.leerObjetos("MisContactos.data");
         initComponents();
         this.setTitle("AGENDA 1.0");
         this.setLocationRelativeTo(null);
+        
     }
 
     
@@ -43,8 +48,8 @@ public class Principal extends javax.swing.JFrame {
         Agregar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        option_txt = new javax.swing.JCheckBox();
-        option_ser = new javax.swing.JCheckBox();
+        GuardarSerializacion = new javax.swing.JButton();
+        GuardarTxt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -180,14 +185,14 @@ public class Principal extends javax.swing.JFrame {
             .addGap(0, 59, Short.MAX_VALUE)
         );
 
-        option_txt.setText("Archivo Txt");
-
-        option_ser.setText("Serializacion");
-        option_ser.addActionListener(new java.awt.event.ActionListener() {
+        GuardarSerializacion.setText("Serializacion");
+        GuardarSerializacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                option_serActionPerformed(evt);
+                GuardarSerializacionActionPerformed(evt);
             }
         });
+
+        GuardarTxt.setText("Archivo Txt");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -195,23 +200,24 @@ public class Principal extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(option_ser)
-                    .addComponent(option_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 2, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(GuardarSerializacion)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(GuardarTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(option_txt)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(GuardarSerializacion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(option_ser)
-                .addGap(22, 22, 22)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(GuardarTxt)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -225,18 +231,17 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(Agregar, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                     .addComponent(CambiarNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(Agregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(8, 8, 8)
                         .addComponent(CambiarNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Elimininar)))
@@ -306,7 +311,8 @@ public class Principal extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(this, "Se ha añadido el contacto","PROCESO COMPLETADO", JOptionPane.INFORMATION_MESSAGE); 
           }else{
            JOptionPane.showMessageDialog(this, "Numero Invalido","ERROR", JOptionPane.ERROR_MESSAGE);
-          }             
+          } 
+     
     }//GEN-LAST:event_AgregarActionPerformed
 
     private void CambiarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarNombreActionPerformed
@@ -328,6 +334,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
        String name=this.txt_bnombre.getText(); 
+       this.txt_nombre.setText("");
+       this.txt_telefono.setText("");
        boolean repetido =false;
        Persona buscado=null;
         for(Persona p: contacto){
@@ -345,11 +353,9 @@ public class Principal extends javax.swing.JFrame {
        }  
     }//GEN-LAST:event_BuscarActionPerformed
 
-    private void option_serActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_option_serActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_option_serActionPerformed
-
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
+
+       
         System.exit(0);
     }//GEN-LAST:event_SalirActionPerformed
 
@@ -372,10 +378,16 @@ public class Principal extends javax.swing.JFrame {
      }
     }//GEN-LAST:event_ElimininarActionPerformed
 
+    private void GuardarSerializacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarSerializacionActionPerformed
+        Serializacion serializadora= new  Serializacion();
+        serializadora.escribirObjetos(contacto);
+  JOptionPane.showMessageDialog(this, "Su modificacion ha sido guardad en el disco duro","Exito", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_GuardarSerializacionActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]){
   
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -390,6 +402,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton Buscar;
     private javax.swing.JButton CambiarNombre;
     private javax.swing.JButton Elimininar;
+    private javax.swing.JButton GuardarSerializacion;
+    private javax.swing.JButton GuardarTxt;
     private javax.swing.JButton Salir;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -402,10 +416,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JCheckBox option_ser;
-    private javax.swing.JCheckBox option_txt;
     private javax.swing.JTextField txt_bnombre;
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_telefono;
     // End of variables declaration//GEN-END:variables
+
+    private void GuardarSerializacion(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

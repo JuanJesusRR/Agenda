@@ -1,10 +1,13 @@
+package agenda;
+
+import java.io.Serializable;
 
 
 /**
  *
  * @author Juan-Jesus
  */
-public class Persona {
+public class Persona implements Serializable{
 
     static void remove(Persona p) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -15,6 +18,10 @@ public class Persona {
     public Persona(String nombre, String telefono) {
         this.nombre = nombre;
         this.telefono = telefono;
+    }
+
+    Persona() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getNombre() {
