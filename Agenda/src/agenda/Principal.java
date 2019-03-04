@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
  * @author Juan-Jesus
  */
 public class Principal extends javax.swing.JFrame  {
+    boolean nombre1=true;
 
  private ArrayList<Persona> contacto;
  
@@ -347,6 +348,10 @@ public class Principal extends javax.swing.JFrame  {
         String nombre=txt_nombre.getText();
         String telefono=txt_telefono.getText();
         boolean repetido =false;
+        if(isNumeric(telefono)==true){
+        if(nombre.length()==0){
+            JOptionPane.showMessageDialog(null, "Debe introducir un nombre");
+        }else{
         for(Persona p:contacto){
        if( p.getNombre().equals(nombre)){
        repetido=true;}
@@ -359,8 +364,10 @@ public class Principal extends javax.swing.JFrame  {
           JOptionPane.showMessageDialog(this, "Se ha añadido el contacto","PROCESO COMPLETADO", JOptionPane.INFORMATION_MESSAGE); 
           }else{
            JOptionPane.showMessageDialog(this, "Numero Invalido","ERROR", JOptionPane.ERROR_MESSAGE);
+          }         
+        }}else{
+           JOptionPane.showMessageDialog(null, "Debe introducir solamente números");
           } 
-     
     }//GEN-LAST:event_AgregarActionPerformed
 
     private void CambiarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarNombreActionPerformed
@@ -405,8 +412,7 @@ public class Principal extends javax.swing.JFrame  {
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
-
-       
+     
         System.exit(0);
     }//GEN-LAST:event_SalirActionPerformed
 
@@ -492,6 +498,17 @@ public class Principal extends javax.swing.JFrame  {
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_telefono;
     // End of variables declaration//GEN-END:variables
+    public static boolean isNumeric(String cadena) {
 
-   
+        boolean resultado;
+
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+
+        return resultado;
+    }
 }
