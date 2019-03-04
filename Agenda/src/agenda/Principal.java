@@ -357,7 +357,7 @@ public class Principal extends javax.swing.JFrame  {
        repetido=true;}
         } 
        if(repetido){
-           JOptionPane.showMessageDialog(this, "Ya existe un profesor con dni","Error", JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(this, "Ya existe un contacto con ese nombre","Error", JOptionPane.ERROR_MESSAGE);
        }else if(Metodos.validarTelefono(telefono)){
            Persona n=new Persona(nombre,telefono);
           contacto.add(n);
