@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  * @author Juan-Jesus
  */
 public class Principal extends javax.swing.JFrame  {
-    boolean nombre1=true;
+
 
  private ArrayList<Persona> contacto;
  
@@ -60,7 +60,24 @@ public class Principal extends javax.swing.JFrame  {
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del contacto"));
 
+        txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_telefonoKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("Telefono:");
+
+        txt_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_nombreActionPerformed(evt);
+            }
+        });
+        txt_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nombreKeyTyped(evt);
+            }
+        });
 
         jLabel3.setText("Nombre:");
 
@@ -345,41 +362,35 @@ public class Principal extends javax.swing.JFrame  {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
+        if(CargarSerializacion.isSelected()||CargarTxt.isSelected()){
         String nombre=txt_nombre.getText();
         String telefono=txt_telefono.getText();
+      
         boolean repetido =false;
-        if(CargarSerializacion.isSelected()==true){
-        if(isNumeric(telefono)==true){
-        if(nombre.length()==0){
-            JOptionPane.showMessageDialog(null, "Debe introducir un nombre");
-        }else{
-        for(Persona p:contacto){
-       if( p.getNombre().equals(nombre)){
-       repetido=true;}
-        } 
-       if(repetido){
-           JOptionPane.showMessageDialog(this, "Ya existe un contacto con ese nombre","Error", JOptionPane.ERROR_MESSAGE);
-       }else if(Metodos.validarTelefono(telefono)){
+             for( Persona p:contacto){
+             if( p.getNombre().equals(nombre)){
+             repetido=true;
+             }
+             } 
+          if(repetido){
+           JOptionPane.showMessageDialog(this, "Ya existe un contacto con este nombre","ERROR", JOptionPane.ERROR_MESSAGE);
+          }else if(Metodos.validarTelefono(telefono)){
            Persona n=new Persona(nombre,telefono);
           contacto.add(n);
           JOptionPane.showMessageDialog(this, "Se ha añadido el contacto","PROCESO COMPLETADO", JOptionPane.INFORMATION_MESSAGE); 
           }else{
-           JOptionPane.showMessageDialog(this, "Numero Invalido","ERROR", JOptionPane.ERROR_MESSAGE);
-          }         
-        }}else{
-           JOptionPane.showMessageDialog(null, "Debe introducir solamente números");
+           JOptionPane.showMessageDialog(this, "Numero invalido","ERROR", JOptionPane.ERROR_MESSAGE);
           } 
-        }else{
-           JOptionPane.showMessageDialog(null, "No ha cargado ningún dato"); 
-        }
+      }else{JOptionPane.showMessageDialog(this, "Debe cargar datos","ERROR", JOptionPane.ERROR_MESSAGE);} 
+          
+      
+        
     }//GEN-LAST:event_AgregarActionPerformed
 
     private void CambiarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarNombreActionPerformed
-    
+        if(CargarSerializacion.isSelected()||CargarTxt.isSelected()){
         String telefono=txt_telefono.getText();
         String cambio=txt_nombre.getText();
-        
-        if(CargarSerializacion.isSelected()==true){
         if(cambio.length()==0){     
         JOptionPane.showMessageDialog(this, "No introdujo ningun nombre","Error", JOptionPane.INFORMATION_MESSAGE);
         }else{
@@ -390,9 +401,7 @@ public class Principal extends javax.swing.JFrame  {
           JOptionPane.showMessageDialog(this, "El nombre ha sido cambiado con exito","Exito", JOptionPane.INFORMATION_MESSAGE); 
         }
         }else{
-           JOptionPane.showMessageDialog(null, "No ha cargado ningún dato"); 
-           
-        }
+           JOptionPane.showMessageDialog(null, "No ha cargado ningún dato"); }
     }//GEN-LAST:event_CambiarNombreActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
@@ -451,10 +460,9 @@ public class Principal extends javax.swing.JFrame  {
         if(CargarSerializacion.isSelected()==true){
         Serializacion serializadora= new  Serializacion();
         serializadora.escribirObjetos(contacto);
-  JOptionPane.showMessageDialog(this, "Su modificacion ha sido guardad en el disco duro","Exito", JOptionPane.INFORMATION_MESSAGE);
-        }else{
-           JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");  
-         }
+        JOptionPane.showMessageDialog(this, "Su modificacion ha sido guardad en el disco duro","Exito", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");}
     
     }//GEN-LAST:event_GuardarSerializacionActionPerformed
 
@@ -477,10 +485,37 @@ public class Principal extends javax.swing.JFrame  {
         Archivotxt archivo=new Archivotxt();
         archivo.escribir(contacto);
         JOptionPane.showMessageDialog(null, "Sus contactos se han guardado en un archivo de texto");
-        }else{
-           JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");  
-         }
+        }
+        else{JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");}
     }//GEN-LAST:event_GuardarTxtActionPerformed
+
+    private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nombreActionPerformed
+
+    private void txt_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreKeyTyped
+       char validar=evt.getKeyChar();
+      if(Character.isDigit(validar)){
+      getToolkit().beep();
+      evt.consume();
+      JOptionPane.showMessageDialog(this, "Debe ingresar solo letras","ERROR", JOptionPane.ERROR_MESSAGE);
+      }
+       
+    }//GEN-LAST:event_txt_nombreKeyTyped
+
+    private void txt_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyTyped
+       char validar=evt.getKeyChar();
+      if(Character.isLetter(validar)){
+      getToolkit().beep();
+      evt.consume();
+      JOptionPane.showMessageDialog(this, "Debe ingresar solo numeros","ERROR", JOptionPane.ERROR_MESSAGE);
+      }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_txt_telefonoKeyTyped
 
     public static void main(String args[]){
   
@@ -519,17 +554,5 @@ public class Principal extends javax.swing.JFrame  {
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_telefono;
     // End of variables declaration//GEN-END:variables
-    public static boolean isNumeric(String cadena) {
-
-        boolean resultado;
-
-        try {
-            Integer.parseInt(cadena);
-            resultado = true;
-        } catch (NumberFormatException excepcion) {
-            resultado = false;
-        }
-
-        return resultado;
-    }
+ 
 }

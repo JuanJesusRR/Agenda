@@ -2,11 +2,6 @@ package agenda;
 
 import java.io.Serializable;
 
-
-/**
- *
- * @author Juan-Jesus
- */
 public class Persona implements Serializable{
 
     static void remove(Persona p) {
