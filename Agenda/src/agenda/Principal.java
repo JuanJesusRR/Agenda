@@ -348,6 +348,7 @@ public class Principal extends javax.swing.JFrame  {
         String nombre=txt_nombre.getText();
         String telefono=txt_telefono.getText();
         boolean repetido =false;
+        if(CargarSerializacion.isSelected()==true){
         if(isNumeric(telefono)==true){
         if(nombre.length()==0){
             JOptionPane.showMessageDialog(null, "Debe introducir un nombre");
@@ -368,6 +369,9 @@ public class Principal extends javax.swing.JFrame  {
         }}else{
            JOptionPane.showMessageDialog(null, "Debe introducir solamente números");
           } 
+        }else{
+           JOptionPane.showMessageDialog(null, "No ha cargado ningún dato"); 
+        }
     }//GEN-LAST:event_AgregarActionPerformed
 
     private void CambiarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarNombreActionPerformed
@@ -375,7 +379,7 @@ public class Principal extends javax.swing.JFrame  {
         String telefono=txt_telefono.getText();
         String cambio=txt_nombre.getText();
         
-        
+        if(CargarSerializacion.isSelected()==true){
         if(cambio.length()==0){     
         JOptionPane.showMessageDialog(this, "No introdujo ningun nombre","Error", JOptionPane.INFORMATION_MESSAGE);
         }else{
@@ -384,6 +388,10 @@ public class Principal extends javax.swing.JFrame  {
          p.setNombre(cambio);
       }}
           JOptionPane.showMessageDialog(this, "El nombre ha sido cambiado con exito","Exito", JOptionPane.INFORMATION_MESSAGE); 
+        }
+        }else{
+           JOptionPane.showMessageDialog(null, "No ha cargado ningún dato"); 
+           
         }
     }//GEN-LAST:event_CambiarNombreActionPerformed
 
@@ -424,6 +432,7 @@ public class Principal extends javax.swing.JFrame  {
 
     private void ElimininarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ElimininarActionPerformed
          String name=this.txt_nombre.getText();
+         if(CargarSerializacion.isSelected()==true){
          this.txt_nombre.setText("");
         this.txt_telefono.setText("");
          for(Persona p: contacto){
@@ -433,12 +442,20 @@ public class Principal extends javax.swing.JFrame  {
        JOptionPane.showMessageDialog(this, "El proceso se completo con exito","Contacto Eliminado", JOptionPane.INFORMATION_MESSAGE);
       }else{JOptionPane.showMessageDialog(this, "El proceso no se completo con exito","Contacto No Eliminado", JOptionPane.ERROR_MESSAGE);}
      }
+         }else{
+           JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");  
+         }
     }//GEN-LAST:event_ElimininarActionPerformed
 
     private void GuardarSerializacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarSerializacionActionPerformed
+        if(CargarSerializacion.isSelected()==true){
         Serializacion serializadora= new  Serializacion();
         serializadora.escribirObjetos(contacto);
   JOptionPane.showMessageDialog(this, "Su modificacion ha sido guardad en el disco duro","Exito", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+           JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");  
+         }
+    
     }//GEN-LAST:event_GuardarSerializacionActionPerformed
 
     private void CargarSerializacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarSerializacionActionPerformed
@@ -456,9 +473,13 @@ public class Principal extends javax.swing.JFrame  {
     }//GEN-LAST:event_CargarTxtActionPerformed
 
     private void GuardarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarTxtActionPerformed
+        if(CargarSerializacion.isSelected()==true){
         Archivotxt archivo=new Archivotxt();
         archivo.escribir(contacto);
         JOptionPane.showMessageDialog(null, "Sus contactos se han guardado en un archivo de texto");
+        }else{
+           JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");  
+         }
     }//GEN-LAST:event_GuardarTxtActionPerformed
 
     public static void main(String args[]){
