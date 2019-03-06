@@ -19,7 +19,7 @@ public class Serializacion {
     
     public void escribirObjetos(Object Objecto) {
         try {
-            escritorDeObjetos=new ObjectOutputStream(new FileOutputStream("MisContact.data"));
+            escritorDeObjetos=new ObjectOutputStream(new FileOutputStream("MisContactos.data"));
              escritorDeObjetos.writeObject(Objecto);
            
             

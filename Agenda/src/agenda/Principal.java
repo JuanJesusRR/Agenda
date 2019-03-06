@@ -11,16 +11,19 @@ import javax.swing.JOptionPane;
  */
 public class Principal extends javax.swing.JFrame  {
 
-
  private ArrayList<Persona> contacto;
  
     public Principal() {
-     
-        initComponents();
+         initComponents();
+        contacto=new ArrayList<>();
+        Serializacion deserializadora= new  Serializacion();
+        contacto=(ArrayList<Persona>) deserializadora.leerObjetos("MisContactos.data");
+       buttonGroup1.add(this.CargarSerializacion);
+        buttonGroup1.add(this.CargarArchivoTxt);
+        buttonGroup2.add(this.GuardarSerializacion);
+        buttonGroup2.add(this.GuardarArchivoTxt);
         this.setTitle("AGENDA 1.0");
         this.setLocationRelativeTo(null);
-         buttonGroup3.add(this.CargarSerializacion);
-       buttonGroup3.add(this.CargarTxt);
         
     }
 
@@ -31,32 +34,96 @@ public class Principal extends javax.swing.JFrame  {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
         jPanel7 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        CargarSerializacion = new javax.swing.JRadioButton();
+        CargarArchivoTxt = new javax.swing.JRadioButton();
+        Salir = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        Buscar = new javax.swing.JButton();
+        txt_bnombre = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         txt_telefono = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         Actualizar = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        Buscar = new javax.swing.JButton();
-        txt_bnombre = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        CargarSerializacion = new javax.swing.JRadioButton();
-        CargarTxt = new javax.swing.JRadioButton();
-        Salir = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        Elimininar = new javax.swing.JButton();
-        CambiarNombre = new javax.swing.JButton();
         Agregar = new javax.swing.JButton();
+        CambiarNombre = new javax.swing.JButton();
+        Eliminar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        GuardarSerializacion = new javax.swing.JButton();
-        GuardarTxt = new javax.swing.JButton();
+        GuardarSerializacion = new javax.swing.JRadioButton();
+        GuardarArchivoTxt = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        Cerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cargar Datos"));
+
+        CargarSerializacion.setText("Serializacion");
+        CargarSerializacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CargarSerializacionActionPerformed(evt);
+            }
+        });
+
+        CargarArchivoTxt.setText("ArchivoTxt");
+        CargarArchivoTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CargarArchivoTxtActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CargarArchivoTxt)
+                    .addComponent(CargarSerializacion))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(CargarSerializacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CargarArchivoTxt)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        Salir.setText("Salir");
+        Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 403, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        Buscar.setText("Buscar");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Introduzca el nombre de contacto:");
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del contacto"));
 
@@ -68,11 +135,6 @@ public class Principal extends javax.swing.JFrame  {
 
         jLabel2.setText("Telefono:");
 
-        txt_nombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_nombreActionPerformed(evt);
-            }
-        });
         txt_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_nombreKeyTyped(evt);
@@ -129,94 +191,10 @@ public class Principal extends javax.swing.JFrame  {
                         .addContainerGap())))
         );
 
-        Buscar.setText("Buscar");
-        Buscar.addActionListener(new java.awt.event.ActionListener() {
+        Agregar.setText("Agregar  contacto");
+        Agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Introduzca el nombre de contacto:");
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cargar Datos"));
-
-        CargarSerializacion.setText("Serializacion");
-        CargarSerializacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CargarSerializacionActionPerformed(evt);
-            }
-        });
-
-        CargarTxt.setText("Archivo Txt");
-        CargarTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CargarTxtActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CargarSerializacion)
-                    .addComponent(CargarTxt))
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(CargarSerializacion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CargarTxt)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_bnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(112, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_bnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
-        );
-
-        Salir.setText("Salir");
-        Salir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SalirActionPerformed(evt);
-            }
-        });
-
-        Elimininar.setText("Eliminar contacto");
-        Elimininar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ElimininarActionPerformed(evt);
+                AgregarActionPerformed(evt);
             }
         });
 
@@ -227,14 +205,14 @@ public class Principal extends javax.swing.JFrame  {
             }
         });
 
-        Agregar.setText("Agregar  contacto");
-        Agregar.addActionListener(new java.awt.event.ActionListener() {
+        Eliminar.setText("Eliminar contacto");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgregarActionPerformed(evt);
+                EliminarActionPerformed(evt);
             }
         });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Guardar datos"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Guardar cambios"));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -244,7 +222,7 @@ public class Principal extends javax.swing.JFrame  {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 59, Short.MAX_VALUE)
+            .addGap(0, 88, Short.MAX_VALUE)
         );
 
         GuardarSerializacion.setText("Serializacion");
@@ -254,10 +232,10 @@ public class Principal extends javax.swing.JFrame  {
             }
         });
 
-        GuardarTxt.setText("Archivo Txt");
-        GuardarTxt.addActionListener(new java.awt.event.ActionListener() {
+        GuardarArchivoTxt.setText("ArchivoTxt");
+        GuardarArchivoTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarTxtActionPerformed(evt);
+                GuardarArchivoTxtActionPerformed(evt);
             }
         });
 
@@ -266,69 +244,69 @@ public class Principal extends javax.swing.JFrame  {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(GuardarSerializacion)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(GuardarTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                        .addContainerGap())))
+                .addComponent(GuardarArchivoTxt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(95, 95, 95))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(GuardarSerializacion)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(GuardarSerializacion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(GuardarTxt)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(GuardarArchivoTxt)))
         );
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Elimininar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Agregar, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                    .addComponent(CambiarNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(Agregar)
-                        .addGap(8, 8, 8)
-                        .addComponent(CambiarNombre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Elimininar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel1.setText("Recuerde guardar ");
+
+        Cerrar.setText("Salir");
+        Cerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CerrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Salir))
-                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_bnombre)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(CambiarNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(Agregar, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Cerrar)))
+                        .addGap(340, 340, 340)
+                        .addComponent(Salir)))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -337,21 +315,46 @@ public class Principal extends javax.swing.JFrame  {
                 .addGap(91, 91, 91)
                 .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(93, 93, 93)
-                        .addComponent(Salir)
-                        .addContainerGap())
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_bnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(Agregar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CambiarNombre)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Eliminar))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,32 +365,32 @@ public class Principal extends javax.swing.JFrame  {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
-        if(CargarSerializacion.isSelected()||CargarTxt.isSelected()){
-       String nombre=txt_nombre.getText();
-       String telefono=txt_telefono.getText();
-   
-     
-     boolean repetido =false;
-     for( Persona p:contacto){
-     if( p.getNombre().equals(nombre)){
-     repetido=true;
-     }
-     }
-     if(repetido){
-     JOptionPane.showMessageDialog(this, "Ya existe un contacto con este nombre","ERROR", JOptionPane.ERROR_MESSAGE);
-     }else if(Metodos.validarTelefono(telefono)){
-     Persona n=new Persona(nombre,telefono);
-     contacto.add(n);
-     JOptionPane.showMessageDialog(this, "Se ha añadido el contacto","PROCESO COMPLETADO", JOptionPane.INFORMATION_MESSAGE);  
-       }
-     }else{JOptionPane.showMessageDialog(this, "Debe cargar datos","ERROR", JOptionPane.ERROR_MESSAGE);}
-     
+        if(CargarSerializacion.isSelected()||CargarArchivoTxt.isSelected()){
+        String nombre=txt_nombre.getText();
+        String telefono=txt_telefono.getText();
+        boolean repetido =false;
+        for(Persona p:contacto){
+       if( p.getNombre().equals(nombre)){
+       repetido=true;}
+        } 
+       if(repetido){
+           JOptionPane.showMessageDialog(this, "Ya existe un profesor con dni","Error", JOptionPane.ERROR_MESSAGE);
+       }else if(Metodos.validarTelefono(telefono)){
+           Persona n=new Persona(nombre,telefono);
+          contacto.add(n);
+          JOptionPane.showMessageDialog(this, "Se ha añadido el contacto","PROCESO COMPLETADO", JOptionPane.INFORMATION_MESSAGE); 
+          }else{
+           JOptionPane.showMessageDialog(this, "Numero Invalido","ERROR", JOptionPane.ERROR_MESSAGE);
+          } 
+      }else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");}
     }//GEN-LAST:event_AgregarActionPerformed
 
     private void CambiarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarNombreActionPerformed
-        if(CargarSerializacion.isSelected()||CargarTxt.isSelected()){
+    if(CargarSerializacion.isSelected()||CargarArchivoTxt.isSelected()){
         String telefono=txt_telefono.getText();
         String cambio=txt_nombre.getText();
+        
+        
         if(cambio.length()==0){     
         JOptionPane.showMessageDialog(this, "No introdujo ningun nombre","Error", JOptionPane.INFORMATION_MESSAGE);
         }else{
@@ -397,14 +400,12 @@ public class Principal extends javax.swing.JFrame  {
       }}
           JOptionPane.showMessageDialog(this, "El nombre ha sido cambiado con exito","Exito", JOptionPane.INFORMATION_MESSAGE); 
         }
-        }else{
-           JOptionPane.showMessageDialog(null, "No ha cargado ningún dato"); }
+         }else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");}
     }//GEN-LAST:event_CambiarNombreActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-      
-       if(CargarSerializacion.isSelected()||CargarTxt.isSelected()){
-       String name=this.txt_bnombre.getText(); 
+       if(CargarSerializacion.isSelected()||CargarArchivoTxt.isSelected()){
+        String name=this.txt_bnombre.getText(); 
        this.txt_nombre.setText("");
        this.txt_telefono.setText("");
        boolean repetido =false;
@@ -421,15 +422,14 @@ public class Principal extends javax.swing.JFrame  {
          this.txt_telefono.setText(buscado.getTelefono());     
     }else{
        JOptionPane.showMessageDialog(this, "Contacto no encontrado","", JOptionPane.INFORMATION_MESSAGE);
-       }   
-      }else{JOptionPane.showMessageDialog(this, "No ha cargado ningún dato","", JOptionPane.ERROR_MESSAGE);}
-      
-      
+       }  
+        }else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");}
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
-     
-        System.exit(0);
+
+       
+      
     }//GEN-LAST:event_SalirActionPerformed
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
@@ -438,57 +438,21 @@ public class Principal extends javax.swing.JFrame  {
         this.txt_telefono.setText("");
     }//GEN-LAST:event_ActualizarActionPerformed
 
-    private void ElimininarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ElimininarActionPerformed
-         
-         if(CargarSerializacion.isSelected()||CargarTxt.isSelected()){
-         String name=this.txt_nombre.getText();
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+     if(CargarSerializacion.isSelected()||CargarArchivoTxt.isSelected()){    
+        String name=this.txt_nombre.getText();
          this.txt_nombre.setText("");
         this.txt_telefono.setText("");
          for(Persona p: contacto){
-       if( p.getNombre().equals(name)){
-        contacto.remove(p);
-       
-       JOptionPane.showMessageDialog(this, "El proceso se completo con exito","Contacto Eliminado", JOptionPane.INFORMATION_MESSAGE);
-      }else{JOptionPane.showMessageDialog(this, "El proceso no se completo con exito","Contacto No Eliminado", JOptionPane.ERROR_MESSAGE);}
-     }
-         }else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");}
-       
-    }//GEN-LAST:event_ElimininarActionPerformed
-
-    private void GuardarSerializacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarSerializacionActionPerformed
-
-        Serializacion serializadora= new  Serializacion();
-        serializadora.escribirObjetos(contacto);
-        JOptionPane.showMessageDialog(this, "Su modificacion ha sido guardad en el disco duro","Exito", JOptionPane.INFORMATION_MESSAGE);
-  
-    }//GEN-LAST:event_GuardarSerializacionActionPerformed
-
-    private void CargarSerializacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarSerializacionActionPerformed
-        contacto=new ArrayList<>();
-        Serializacion deserializadora= new  Serializacion();
-        contacto=(ArrayList<Persona>) deserializadora.leerObjetos("MisContact.data"); 
-        JOptionPane.showMessageDialog(this, "Ha cargado sus datos por serializacion","Carga", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_CargarSerializacionActionPerformed
-
-    private void CargarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarTxtActionPerformed
-        contacto=new ArrayList<>();
-        Archivotxt archivo1=new Archivotxt();
-        contacto=(ArrayList<Persona>) archivo1.leer("Contactos.txt");
-        JOptionPane.showMessageDialog(null, "Sus contactos se han cargado de un archivo de texto");
-    }//GEN-LAST:event_CargarTxtActionPerformed
-
-    private void GuardarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarTxtActionPerformed
-        if(CargarSerializacion.isSelected()==true){
-        Archivotxt archivo=new Archivotxt();
-        archivo.escribir(contacto);
-        JOptionPane.showMessageDialog(null, "Sus contactos se han guardado en un archivo de texto");
-        }
-        else{JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");}
-    }//GEN-LAST:event_GuardarTxtActionPerformed
-
-    private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_nombreActionPerformed
+       if( p.getNombre().equals(name)){   
+       p.setNombre("Unknow");
+       p.setTelefono("0000000000");
+       }
+      } 
+      JOptionPane.showMessageDialog(this, "El proceso se completo con exito","Contacto Eliminado", JOptionPane.INFORMATION_MESSAGE);
+       }else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");}
+     
+    }//GEN-LAST:event_EliminarActionPerformed
 
     private void txt_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreKeyTyped
        char validar=evt.getKeyChar();
@@ -497,23 +461,49 @@ public class Principal extends javax.swing.JFrame  {
       evt.consume();
       JOptionPane.showMessageDialog(this, "Debe ingresar solo letras","ERROR", JOptionPane.ERROR_MESSAGE);
       }
-       
     }//GEN-LAST:event_txt_nombreKeyTyped
 
     private void txt_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyTyped
-       char validar=evt.getKeyChar();
+         char validar=evt.getKeyChar();
       if(Character.isLetter(validar)){
       getToolkit().beep();
       evt.consume();
-      JOptionPane.showMessageDialog(this, "Debe ingresar solo numeros","ERROR", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(this, "Debe ingresar solo letras","ERROR", JOptionPane.ERROR_MESSAGE);
       }
-        
-        
-        
-        
-        
     }//GEN-LAST:event_txt_telefonoKeyTyped
 
+    private void CargarSerializacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarSerializacionActionPerformed
+       contacto=new ArrayList<>();
+        Serializacion deserializadora= new  Serializacion();
+        contacto=(ArrayList<Persona>) deserializadora.leerObjetos("MisContactos.data");
+    }//GEN-LAST:event_CargarSerializacionActionPerformed
+
+    private void CargarArchivoTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarArchivoTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CargarArchivoTxtActionPerformed
+
+    private void GuardarSerializacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarSerializacionActionPerformed
+    Serializacion serializadora= new  Serializacion();
+   serializadora.escribirObjetos(contacto);
+  JOptionPane.showMessageDialog(this, "Su modificacion ha sido guardad en el disco duro","Exito", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_GuardarSerializacionActionPerformed
+
+    private void CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarActionPerformed
+         System.exit(0);
+    }//GEN-LAST:event_CerrarActionPerformed
+
+    private void GuardarArchivoTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarArchivoTxtActionPerformed
+        if(CargarSerializacion.isSelected()==true){
+        Archivotxt archivo=new Archivotxt();
+        archivo.escribir(contacto);
+        JOptionPane.showMessageDialog(null, "Sus contactos se han guardado en un archivo de texto");
+        }
+        else{JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");}
+    }//GEN-LAST:event_GuardarArchivoTxtActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]){
   
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -528,19 +518,19 @@ public class Principal extends javax.swing.JFrame  {
     private javax.swing.JButton Agregar;
     private javax.swing.JButton Buscar;
     private javax.swing.JButton CambiarNombre;
+    private javax.swing.JRadioButton CargarArchivoTxt;
     private javax.swing.JRadioButton CargarSerializacion;
-    private javax.swing.JRadioButton CargarTxt;
-    private javax.swing.JButton Elimininar;
-    private javax.swing.JButton GuardarSerializacion;
-    private javax.swing.JButton GuardarTxt;
+    private javax.swing.JButton Cerrar;
+    private javax.swing.JButton Eliminar;
+    private javax.swing.JRadioButton GuardarArchivoTxt;
+    private javax.swing.JRadioButton GuardarSerializacion;
     private javax.swing.JButton Salir;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -551,5 +541,8 @@ public class Principal extends javax.swing.JFrame  {
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_telefono;
     // End of variables declaration//GEN-END:variables
- 
+
+    private void GuardarSerializacion(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
