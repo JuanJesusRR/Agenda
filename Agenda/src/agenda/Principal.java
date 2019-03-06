@@ -363,28 +363,25 @@ public class Principal extends javax.swing.JFrame  {
 
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
         if(CargarSerializacion.isSelected()||CargarTxt.isSelected()){
-        String nombre=txt_nombre.getText();
-        String telefono=txt_telefono.getText();
-      
-        boolean repetido =false;
-             for( Persona p:contacto){
-             if( p.getNombre().equals(nombre)){
-             repetido=true;
-             }
-             } 
-          if(repetido){
-           JOptionPane.showMessageDialog(this, "Ya existe un contacto con este nombre","ERROR", JOptionPane.ERROR_MESSAGE);
-          }else if(Metodos.validarTelefono(telefono)){
-           Persona n=new Persona(nombre,telefono);
-          contacto.add(n);
-          JOptionPane.showMessageDialog(this, "Se ha añadido el contacto","PROCESO COMPLETADO", JOptionPane.INFORMATION_MESSAGE); 
-          }else{
-           JOptionPane.showMessageDialog(this, "Numero invalido","ERROR", JOptionPane.ERROR_MESSAGE);
-          } 
-      }else{JOptionPane.showMessageDialog(this, "Debe cargar datos","ERROR", JOptionPane.ERROR_MESSAGE);} 
-          
-      
-        
+       String nombre=txt_nombre.getText();
+       String telefono=txt_telefono.getText();
+   
+     
+     boolean repetido =false;
+     for( Persona p:contacto){
+     if( p.getNombre().equals(nombre)){
+     repetido=true;
+     }
+     }
+     if(repetido){
+     JOptionPane.showMessageDialog(this, "Ya existe un contacto con este nombre","ERROR", JOptionPane.ERROR_MESSAGE);
+     }else if(Metodos.validarTelefono(telefono)){
+     Persona n=new Persona(nombre,telefono);
+     contacto.add(n);
+     JOptionPane.showMessageDialog(this, "Se ha añadido el contacto","PROCESO COMPLETADO", JOptionPane.INFORMATION_MESSAGE);  
+       }
+     }else{JOptionPane.showMessageDialog(this, "Debe cargar datos","ERROR", JOptionPane.ERROR_MESSAGE);}
+     
     }//GEN-LAST:event_AgregarActionPerformed
 
     private void CambiarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarNombreActionPerformed
@@ -405,8 +402,8 @@ public class Principal extends javax.swing.JFrame  {
     }//GEN-LAST:event_CambiarNombreActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-      if(CargarSerializacion.isSelected()==true)
-      {
+      
+       if(CargarSerializacion.isSelected()||CargarTxt.isSelected()){
        String name=this.txt_bnombre.getText(); 
        this.txt_nombre.setText("");
        this.txt_telefono.setText("");
@@ -426,6 +423,8 @@ public class Principal extends javax.swing.JFrame  {
        JOptionPane.showMessageDialog(this, "Contacto no encontrado","", JOptionPane.INFORMATION_MESSAGE);
        }   
       }else{JOptionPane.showMessageDialog(this, "No ha cargado ningún dato","", JOptionPane.ERROR_MESSAGE);}
+      
+      
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
@@ -440,8 +439,9 @@ public class Principal extends javax.swing.JFrame  {
     }//GEN-LAST:event_ActualizarActionPerformed
 
     private void ElimininarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ElimininarActionPerformed
+         
+         if(CargarSerializacion.isSelected()||CargarTxt.isSelected()){
          String name=this.txt_nombre.getText();
-         if(CargarSerializacion.isSelected()==true){
          this.txt_nombre.setText("");
         this.txt_telefono.setText("");
          for(Persona p: contacto){
@@ -451,25 +451,22 @@ public class Principal extends javax.swing.JFrame  {
        JOptionPane.showMessageDialog(this, "El proceso se completo con exito","Contacto Eliminado", JOptionPane.INFORMATION_MESSAGE);
       }else{JOptionPane.showMessageDialog(this, "El proceso no se completo con exito","Contacto No Eliminado", JOptionPane.ERROR_MESSAGE);}
      }
-         }else{
-           JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");  
-         }
+         }else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");}
+       
     }//GEN-LAST:event_ElimininarActionPerformed
 
     private void GuardarSerializacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarSerializacionActionPerformed
-        if(CargarSerializacion.isSelected()==true){
+
         Serializacion serializadora= new  Serializacion();
         serializadora.escribirObjetos(contacto);
         JOptionPane.showMessageDialog(this, "Su modificacion ha sido guardad en el disco duro","Exito", JOptionPane.INFORMATION_MESSAGE);
-        }
-        else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");}
-    
+  
     }//GEN-LAST:event_GuardarSerializacionActionPerformed
 
     private void CargarSerializacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarSerializacionActionPerformed
         contacto=new ArrayList<>();
         Serializacion deserializadora= new  Serializacion();
-        contacto=(ArrayList<Persona>) deserializadora.leerObjetos("MisContactos.data"); 
+        contacto=(ArrayList<Persona>) deserializadora.leerObjetos("MisContact.data"); 
         JOptionPane.showMessageDialog(this, "Ha cargado sus datos por serializacion","Carga", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_CargarSerializacionActionPerformed
 
