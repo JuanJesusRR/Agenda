@@ -382,7 +382,7 @@ public class Principal extends javax.swing.JFrame  {
           }else{
            JOptionPane.showMessageDialog(this, "Numero Invalido","ERROR", JOptionPane.ERROR_MESSAGE);
           } 
-      }else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");}
+      }else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato","ERROR", JOptionPane.ERROR_MESSAGE);}
     }//GEN-LAST:event_AgregarActionPerformed
 
     private void CambiarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarNombreActionPerformed
@@ -392,7 +392,7 @@ public class Principal extends javax.swing.JFrame  {
         
         
         if(cambio.length()==0){     
-        JOptionPane.showMessageDialog(this, "No introdujo ningun nombre","Error", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "No introdujo ningun nombre","Error", JOptionPane.ERROR_MESSAGE);
         }else{
             for(Persona p: contacto){
        if( p.getTelefono().equals(telefono)){
@@ -400,7 +400,7 @@ public class Principal extends javax.swing.JFrame  {
       }}
           JOptionPane.showMessageDialog(this, "El nombre ha sido cambiado con exito","Exito", JOptionPane.INFORMATION_MESSAGE); 
         }
-         }else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");}
+         }else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato","ERROR", JOptionPane.ERROR_MESSAGE);}
     }//GEN-LAST:event_CambiarNombreActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
@@ -421,9 +421,9 @@ public class Principal extends javax.swing.JFrame  {
          this.txt_nombre.setText(buscado.getNombre());
          this.txt_telefono.setText(buscado.getTelefono());     
     }else{
-       JOptionPane.showMessageDialog(this, "Contacto no encontrado","", JOptionPane.INFORMATION_MESSAGE);
+       JOptionPane.showMessageDialog(this, "Contacto no encontrado","", JOptionPane.ERROR_MESSAGE);
        }  
-        }else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");}
+        }else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato","ERROR", JOptionPane.ERROR_MESSAGE);}
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
@@ -450,7 +450,7 @@ public class Principal extends javax.swing.JFrame  {
        }
       } 
       JOptionPane.showMessageDialog(this, "El proceso se completo con exito","Contacto Eliminado", JOptionPane.INFORMATION_MESSAGE);
-       }else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato");}
+       }else{ JOptionPane.showMessageDialog(null, "No ha cargado ningún dato","ERROR", JOptionPane.ERROR_MESSAGE);}
      
     }//GEN-LAST:event_EliminarActionPerformed
 
