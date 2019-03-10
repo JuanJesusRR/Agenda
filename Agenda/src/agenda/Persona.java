@@ -42,7 +42,7 @@ public class Persona implements Serializable{
 
     @Override
     public String toString() {
-        return "nombre=" + nombre + ", telefono=" + telefono ;
+        return  this.nombre+ " " + this.telefono + "\n" ;
     }
     
 }

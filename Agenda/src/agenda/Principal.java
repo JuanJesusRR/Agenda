@@ -374,7 +374,7 @@ public class Principal extends javax.swing.JFrame  {
        repetido=true;}
         } 
        if(repetido){
-           JOptionPane.showMessageDialog(this, "Ya existe un profesor con dni","Error", JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(this, "Ya existe un contacto con ese nombre","Error", JOptionPane.ERROR_MESSAGE);
        }else if(Metodos.validarTelefono(telefono)){
            Persona n=new Persona(nombre,telefono);
           contacto.add(n);
@@ -479,7 +479,9 @@ public class Principal extends javax.swing.JFrame  {
     }//GEN-LAST:event_CargarSerializacionActionPerformed
 
     private void CargarArchivoTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarArchivoTxtActionPerformed
-        // TODO add your handling code here:
+        contacto=new ArrayList<>();
+        Archivotxt archivo=new Archivotxt();
+        contacto=archivo.leer("Contactos.txt");
     }//GEN-LAST:event_CargarArchivoTxtActionPerformed
 
     private void GuardarSerializacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarSerializacionActionPerformed
@@ -493,7 +495,7 @@ public class Principal extends javax.swing.JFrame  {
     }//GEN-LAST:event_CerrarActionPerformed
 
     private void GuardarArchivoTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarArchivoTxtActionPerformed
-        if(CargarSerializacion.isSelected()==true){
+        if(CargarSerializacion.isSelected()||CargarArchivoTxt.isSelected()){ 
         Archivotxt archivo=new Archivotxt();
         archivo.escribir(contacto);
         JOptionPane.showMessageDialog(null, "Sus contactos se han guardado en un archivo de texto");
