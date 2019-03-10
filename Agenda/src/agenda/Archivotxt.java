@@ -2,6 +2,8 @@ package agenda;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Archivotxt {
@@ -47,6 +49,19 @@ public ArrayList<Persona> leer(String nombreArchivo){
         } catch (IOException | ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Ha sucedido un error:"+ex);
         
+        }
+        finally{
+            if(entrada!=null){
+                try {
+                    entrada.close();
+                    if(reader!=null){
+                        reader.close();
+                    }
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "Ha sucedido un error:"+ex);
+                }
+                
+            }
         }
    
         return personas;
